@@ -11,7 +11,7 @@
     try {
         // essaie de connection 
         $db = new PDO($dsn, DBUSER, DBPASS);
-        echo "connexion réussi" . "<br>";
+        // echo "connexion réussi" . "<br>";
     } catch(PDOException $error) {
         //recupération message erreur
         echo "Echec de la connexion: " . $error->getMessage() . "<br>";

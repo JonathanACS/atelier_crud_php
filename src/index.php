@@ -11,9 +11,9 @@
         //recupération des données sous forme de tableau associatif
     $users = $query->fetchAll(PDO::FETCH_ASSOC);
 
-    echo "<pre>";
-    print_r($users);
-    echo "</pre>";
+    // echo "<pre>";
+    // print_r($users);
+    // echo "</pre>";
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -29,6 +29,7 @@
             <td>ID</td>
             <td>Prénom</td>
             <td>Nom</td>
+            <td>Actions</td>
         </thead>
         <tbody>
             <?php 
@@ -40,6 +41,9 @@
                     <td><?=$user["id"]?></td>
                     <td><?=$user["first_name"]?></td>
                     <td><?=$user["last_name"]?></td>
+                    <td>
+                        <a href="user.php?id=<?=$user["id"]?>">Voir</a>
+                    </td>
                  </tr>
                 <?php
                 }
