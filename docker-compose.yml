@@ -1,9 +1,9 @@
 services:
   php:
     image: php:8.3-apache
-    container_name: tableau_crud_stage
+    container_name: crud_php8_3
     ports:
-      - "8004:80" # on définit le port pour accéder à l'application (localhost:8003)
+      - "8003:80" # on définit le port pour accéder à l'application (localhost:8003)
     volumes:
       - ./src:/var/www/html # on monte le dossier courant dans le dossier /var/www/html du container
     build:
@@ -11,18 +11,18 @@ services:
       dockerfile: Dockerfile
   db:
     image: mysql:8.0
-    container_name: tableau_stage_mysql8_0
+    container_name: crud_mysql8_0
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root
-      MYSQL_DATABASE: tableau_stage
-      MYSQL_USER: tableau
-      MYSQL_PASSWORD: tableau
+      MYSQL_DATABASE: atelier_crud
+      MYSQL_USER: test
+      MYSQL_PASSWORD: test
     ports:
       - "3308:3306"
   phpma:
     image: phpmyadmin/phpmyadmin
-    container_name: tableau_stage_phpmyadmin
+    container_name: crud_phpmyadmin
     environment:
       PMA_ARBITRARY: 1
       PMA_HOST: db
@@ -30,4 +30,4 @@ services:
       PMA_PASSWORD: root
       UPLOAD_LIMIT: 20M
     ports:
-      - "8084:80" # on définit le port pour accéder à phpmyadmin (localhost:8083)
+      - "8083:80" # on définit le port pour accéder à phpmyadmin (localhost:8083)
