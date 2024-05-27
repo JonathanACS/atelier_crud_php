@@ -1,5 +1,5 @@
 <?php
-
+//on vérifie que qu'il y'a bien une id dans l'url et que l'utilisateur correspendant existe
 if(isset($_GET["id"]) && !empty($_GET["id"])){
 
 require_once("connect.php");
@@ -26,31 +26,24 @@ require_once("connect.php");
     
     //On utilise " !$user " verifie si l'utilisateur existe
     if(!$user) {
-    header("Location: index.php");
+        header("Location: index.php");
 
     }else{
-    //déconnexion
-    require_once("disconnect.php");
+        //on gère la suppréssion de l'utilisateur
+        $sql = "DELETE FROM users WHERE id = :id";
 
+        $query = $db->prepare($sql);
+
+        //on accroche la valeur id de la requette à celle de la variable $id
+        $query->bindValue(":id", $id, PDO::PARAM_INT);
+
+        //lancement de la fonction
+        $query->execute();
+        header("Location: index.php");
     }
 
     // print_r($user);
     } else {
-    header("Location: index.php");
+        header("Location: index.php");
     }
 ?>
-
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>utilisateur <?= $user["first_name"] . " " . $user["last_name"]?></title>
-</head>
-<body>
-    <h1>Page de <?= $user["first_name"] . " " . $user["last_name"]?></h1>
-
-
-    <a href="index.php">retour</a>
-</body>
-</html>

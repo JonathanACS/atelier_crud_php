@@ -1,4 +1,6 @@
 <?php
+//on démare une sesssion
+session_start();
 
 if(
     isset($_POST["first_name"]) && !empty($_POST["first_name"])
@@ -16,6 +18,8 @@ $query->bindValue(":first_name", $first_name);
 $query->bindValue(":last_name", $last_name);
 
 $query->execute();
+
+$_SESSION["message" = "Utilisateur ajouté(e)"];
 
 header("Location: index.php");
 } else {
